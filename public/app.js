@@ -1,5 +1,6 @@
 const deleteUserForm = document.querySelector('#deleteUser')
 const deleteCategoryForm = document.querySelector('#deleteCategory')
+const filterRecordForm = document.querySelector('#filterRecord')
 
 if (deleteUserForm) {
     deleteUserForm.addEventListener('submit', (event) => {
@@ -32,6 +33,35 @@ if (deleteCategoryForm) {
                     window.location.href = '/category'
                 } else {
                     window.location.href = '/delete/category/error'
+                }
+            })
+    })
+}
+
+if (filterRecordForm) {
+    filterRecordForm.addEventListener('submit', (event) => {
+        event.preventDefault()
+        const userId = filterRecordForm.querySelector("input[id='user_id']").value
+        const categoryId = filterRecordForm.querySelector("input[id='category_id']").value
+        fetch(`/record?userId=${userId}&categoryId=${categoryId}`)
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+                if (res.selectedRecords.length) {
+                    document.body.innerHTML = "";
+                    const jsonDisplay = document.createElement("pre");
+                    jsonDisplay.textContent = JSON.stringify(res.selectedRecords, null, 2);
+                    document.body.appendChild(jsonDisplay);
+                } else {
+                    if (res.status == 'u') {
+                        window.location.href = '/find/filter/userId/error'
+                    } else if (res.status == 'c') {
+                        window.location.href = '/find/filter/categoryId/error'
+                    } else if (res.status == 'a') {
+                        window.location.href = '/find/filter/error'
+                    } else {
+                        window.location.href = '/find/filter/noParams/error'
+                    }
                 }
             })
     })

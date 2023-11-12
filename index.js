@@ -8,6 +8,7 @@ const findRoute = require('./routes/find')
 const usersRoute = require('./routes/users')
 const deleteRoute = require('./routes/delete')
 const categoryRoute = require('./routes/category')
+const recordRoute = require('./routes/record')
 
 
 const hbs = expHbs.create({
@@ -30,6 +31,7 @@ app.use('/find', findRoute)
 app.use('/users', usersRoute)
 app.use('/delete', deleteRoute)
 app.use('/category', categoryRoute)
+app.use('/record', recordRoute)
 
 function start() {
     const PORT = process.env.PORT || 3000
