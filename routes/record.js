@@ -60,4 +60,14 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+router.delete('/:id', async (req, res) => {
+    try {
+        const records = await Record.removeRecordById(req.params.id)
+        res.json(records)
+    } catch (e) {
+        res.status(404).json({ error: 'Server error!' })
+        return
+    }
+})
+
 module.exports = router

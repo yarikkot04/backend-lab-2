@@ -1,6 +1,8 @@
 const deleteUserForm = document.querySelector('#deleteUser')
 const deleteCategoryForm = document.querySelector('#deleteCategory')
 const filterRecordForm = document.querySelector('#filterRecord')
+const deleteRecordForm = document.querySelector('#deleteRecord')
+
 
 if (deleteUserForm) {
     deleteUserForm.addEventListener('submit', (event) => {
@@ -62,6 +64,25 @@ if (filterRecordForm) {
                     } else {
                         window.location.href = '/find/filter/noParams/error'
                     }
+                }
+            })
+    })
+}
+
+if (deleteRecordForm) {
+    deleteRecordForm.addEventListener('submit', (event) => {
+        event.preventDefault()
+        const recordId = deleteRecordForm.querySelector("input[id='id']").value
+        fetch(`/record/${recordId}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(res => {
+                if (Array.isArray(res)) {
+                    window.location.href = '/records'
+                } else {
+                    window.location.href = '/delete/record/error'
+
                 }
             })
     })
