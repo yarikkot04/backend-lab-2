@@ -11,4 +11,14 @@ router.get('/user/error', (req, res) => {
     res.status(404).json({ error: 'The user with this id does not exist' })
 })
 
+router.get('/category', (req, res) => {
+    res.render('category-delete', {
+        title: 'Delete category'
+    })
+})
+
+router.get('/category/error', (req, res) => {
+    res.status(404).json({ error: 'No category with this name exists' })
+})
+
 module.exports = router

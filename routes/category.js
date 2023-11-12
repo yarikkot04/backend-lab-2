@@ -34,4 +34,14 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.delete('/', async (req, res) => {
+    try {
+        const categories = await Category.removeCategoryByName(req.query.categoryName)
+        res.json(categories)
+    } catch (e) {
+        res.status(404).json({ error: 'Server error!' })
+        return
+    }
+})
+
 module.exports = router
