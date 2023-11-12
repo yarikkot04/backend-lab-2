@@ -34,4 +34,20 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+router.delete('/:id', async (req, res) => {
+    try {
+        const id = req.params.id
+        const selectedUser = await User.findById(id)
+        if (!selectedUser) {
+            res.status(404).json({ error: 'The user with this id does not exist', status: 1 })
+            return
+        }
+        const users = await User.removeUser(id)
+        res.json({ users, status: 0 })
+    } catch (e) {
+        res.status(404).json({ error: 'Server error!' })
+        return
+    }
+})
+
 module.exports = router

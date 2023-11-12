@@ -6,6 +6,8 @@ const mainRoute = require('./routes/main')
 const userRoute = require('./routes/user')
 const findRoute = require('./routes/find')
 const usersRoute = require('./routes/users')
+const deleteRoute = require('./routes/delete')
+
 
 const hbs = expHbs.create({
     defaultLayout: 'main',
@@ -25,6 +27,7 @@ app.use('/', mainRoute)
 app.use('/user', userRoute)
 app.use('/find', findRoute)
 app.use('/users', usersRoute)
+app.use('/delete', deleteRoute)
 
 
 function start() {
