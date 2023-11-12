@@ -5,7 +5,7 @@ const path = require('path')
 const mainRoute = require('./routes/main')
 const userRoute = require('./routes/user')
 const findRoute = require('./routes/find')
-
+const usersRoute = require('./routes/users')
 
 const hbs = expHbs.create({
     defaultLayout: 'main',
@@ -24,6 +24,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/', mainRoute)
 app.use('/user', userRoute)
 app.use('/find', findRoute)
+app.use('/users', usersRoute)
 
 
 function start() {
